@@ -2,19 +2,22 @@ import numpy as np
 import pandas as pd 
 import random
 from utils import *
-df = [
-    [5.1, 3.5, 1.4, 0.2],
-    [4.9, 3, 1.4, 0.2],
-    [4.7, 3.2, 1.3, 0.2],
-    [7, 3.2, 4.7, 1.4],
-    [6.4, 3.2, 4.5, 1.5],
-    [6.9, 3.1, 4.9, 1.5],
-    [5.6, 2.7, 4.2, 1.3],
-    [6.3, 3.3, 6, 2.5],
-    [5.8, 2.7, 5.1, 1.9],
-    [7.1, 3, 5.9, 2.1],
-     ] # points
+# df = [
+#     [5.1, 3.5, 1.4, 0.2],
+#     [4.9, 3, 1.4, 0.2],
+#     [4.7, 3.2, 1.3, 0.2],
+#     [7, 3.2, 4.7, 1.4],
+#     [6.4, 3.2, 4.5, 1.5],
+#     [6.9, 3.1, 4.9, 1.5],
+#     [5.6, 2.7, 4.2, 1.3],
+#     [6.3, 3.3, 6, 2.5],
+#     [5.8, 2.7, 5.1, 1.9],
+#     [7.1, 3, 5.9, 2.1],
+#      ] # points
 
+df = pd.read_csv('iris.csv')
+df = df.values.tolist()
+df = [x[:-1] for x in df]
 k = 3 # no of clusters
 m = 2 # membership value
 dataSize = len(df) # no of data points
@@ -31,7 +34,7 @@ while True:
     mem = caclMembershipMatrix(mem ,dist ,dataSize ,k, m) # calculating membership values
     # print(dist)
     mem_final = [mem[0][i]+mem[1][i]+mem[2][i] for i in range(len(mem[0]))] 
-    print(mem_final)
+    # print(mem_final)
     new_centroids = calcNewCentroid(df, mem, dataSize, k, m)
     # print(new_centroids)
     obj_func = calcObjFunction(df,mem, new_centroids, dataSize, k, m) # objective funtion between new centroids and datapoints
