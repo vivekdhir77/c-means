@@ -1,4 +1,5 @@
 import math
+import csv
 def getDistance(centroid, point):
     dist = 0;
     for i in range(len(point)):
@@ -63,3 +64,33 @@ def caclMembershipMatrix(mem, dist,dataSize,k, m):
         for j in range(dataSize):
             mem[i][j] = memb(dist, j, i, m)
     return mem
+
+# --- Quantum C means -----
+new_csv_file = "sample.csv"
+def Qpoints(points): # extrapolation
+    new_points = []
+    for i in points:
+        new_points.append(gen_point(i))
+    while(len(new_points)!=1):
+        new_lis = []
+        for i in new_points[0]:
+            for j in new_points[1]:
+                new_lis.append(i*j)
+        new_points.pop(0)
+        new_points.pop(0)
+        new_points.append(new_lis)
+    return new_points[0]
+
+def write_row(point):
+    with open(new_csv_file, 'a') as file:
+        write = csv.writer(file)
+        write.writerow(point)
+        file.close()
+def make_head(n):
+    x = []
+    for i in range(2**(n-1)+1):
+        x.append("x"+str(i+1))
+    write_row(x)
+
+def gen_point(x):
+    return [math.cos(x), math.sin(x)] 
