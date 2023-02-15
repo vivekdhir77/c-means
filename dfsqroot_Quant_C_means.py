@@ -33,10 +33,12 @@ for row in df: # row/sqrt(f1^2 + f2^2 + f3^2...)
     record = []
     for feature in row:
         record.append(feature/denominator)
+    df_new.append(record)
 df = df_new
 k = 3 # no of clusters
 m = 2 # membership value
 dataSize = len(df) # no of data points
+# print(df)
 c = random.sample(df, k) # random k centroids
 epsilon = 1 # stopping criteria 1
 # print(c)
