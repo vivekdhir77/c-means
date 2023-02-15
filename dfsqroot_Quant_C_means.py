@@ -23,9 +23,9 @@ from utils import *
 df = pd.read_csv('lenses.csv')
 df.drop(df.columns[[0]], axis=1, inplace=True)
 df = df.values.tolist()
-df = [x[:-1] for x in df]
+df = [x[:-1] for x in df] # removing cluster number
 df_new = []
-for row in df:
+for row in df: # row/sqrt(f1^2 + f2^2 + f3^2...)
     denominator = 0
     for feature in row:
         denominator += (feature*feature)
@@ -62,9 +62,6 @@ while True:
     if stoppingCriteria2(center_diff) or norm_obj_fun<epsilon:
         break
     c = new_centroids
-#print(new_centroids)
-# print("\n\n")
-#print(mem)
 
 # print("\n\n")
 labels = [0 for i in range(dataSize)]
