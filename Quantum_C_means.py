@@ -20,11 +20,12 @@ from utils import *
 #     [7.1, 3, 5.9, 2.1],
 #      ] # points
 
-df = pd.read_csv('iris.csv')
-
+df = pd.read_csv('lenses.csv')
+df.drop(df.columns[[0]], axis=1, inplace=True) # dropping index
 
 with open(new_csv_file, 'w') as creating_new_csv_file: 
    pass
+print(df.head())
 make_head(len(df.axes[1]))
 for i in df.index:
    row = df.iloc[i].tolist()
@@ -64,10 +65,10 @@ while True:
         break
     c = new_centroids
 #print(new_centroids)
-print("\n\n")
+# print("\n\n")
 #print(mem)
 
-print("\n\n")
+# print("\n\n")
 labels = [0 for i in range(dataSize)]
 
 for i in range(dataSize):
@@ -85,5 +86,5 @@ nplabels = np.array(labels)
 X = np.array(df)
 score1 = sklearn.metrics.silhouette_score(X, nplabels, metric='euclidean')
 score2 = sklearn.metrics.davies_bouldin_score(X,nplabels)
-print(score1)
-print(score2)
+print("SI: ",score1)
+print("DBS: ",score2)

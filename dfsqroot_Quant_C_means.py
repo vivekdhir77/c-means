@@ -24,6 +24,16 @@ df = pd.read_csv('lenses.csv')
 df.drop(df.columns[[0]], axis=1, inplace=True)
 df = df.values.tolist()
 df = [x[:-1] for x in df]
+df_new = []
+for row in df:
+    denominator = 0
+    for feature in row:
+        denominator += (feature*feature)
+    denominator = math.sqrt(denominator)
+    record = []
+    for feature in row:
+        record.append(feature/denominator)
+df = df_new
 k = 3 # no of clusters
 m = 2 # membership value
 dataSize = len(df) # no of data points
