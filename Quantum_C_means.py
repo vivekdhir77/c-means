@@ -48,7 +48,7 @@ mem = [[0 for i in range(dataSize)] for j in range(k)] #initializing memebership
 
 
 while True:
-    dist = calcDistMatrix(dist, c, df) # calculating distance values
+    dist = calcDistMatrix(dist, c, df, type=1) # calculating distance values
     mem = caclMembershipMatrix(mem ,dist ,dataSize ,k, m) # calculating membership values
     # print(dist)
     #mem_final = [mem[0][i]+mem[1][i]+mem[2][i] for i in range(len(mem[0]))] 
