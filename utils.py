@@ -1,10 +1,16 @@
 import math
 import csv
-def getDistance(centroid, point):
+def getDistance(centroid, point, type):
     dist = 0;
     for i in range(len(point)):
-        dist += ((point[i]-centroid[i])**2)
-    return math.sqrt(dist) # distance between 2 points
+        if(type==0):
+            dist += ((point[i]-centroid[i])**2)
+        else:
+            dist += ((point[i]*centroid[i]))
+    if type==0:
+        return math.sqrt(dist) # distance between 2 points
+    else:
+        return dist # distance between 2 points
 
 def memb(dist, i,j,m): # formula for membership
     numerator = 0 
@@ -42,12 +48,12 @@ def calcObjFunction(df,mem, centroid, dataSize, k, m):
             obj_func += (mem[j][i]**m)*(norm_square(df[i], centroid[j]))
     return obj_func
 
-def calcDistMatrix(dist, c, df):
+def calcDistMatrix(dist, c, df, type=0):
     row = 0
     for centroid in c: #calculating distance matrix
         colum = 0
         for point in df:
-            dist[row][colum] = getDistance(centroid, point)
+            dist[row][colum] = getDistance(centroid, point, type)
             colum+=1
         row+=1
     return dist
