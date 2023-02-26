@@ -75,3 +75,4 @@ score1 = sklearn.metrics.silhouette_score(X, nplabels, metric='euclidean')
 score2 = sklearn.metrics.davies_bouldin_score(X,nplabels)
 print(score1)
 print(score2)
+
