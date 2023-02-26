@@ -3,10 +3,9 @@ import pandas as pd
 import random
 import sklearn.datasets
 import sklearn.cluster
-from sklearn.metrics.cluster import normalized_mutual_info_score
-from sklearn.metrics.cluster import adjusted_rand_score
+from sklearn.metrics import normalized_mutual_info_score
+from sklearn.metrics import adjusted_rand_score
 from sklearn.metrics import f1_score
-# Load IRIS dataset
 import time
 
 from utils import *
@@ -60,7 +59,7 @@ def main(df, labelsTrue):
     labels = [0 for i in range(dataSize)]
 
     for i in range(dataSize):
-        c = max(mem[0][i],mem[1][i],mem[2][i])
+        c = max(row[i] for row in mem)
         if c == mem[0][i]:
             labels[i] = 1
         elif c == mem[1][i]:
@@ -72,9 +71,9 @@ def main(df, labelsTrue):
     nplabels = np.array(labels) # predicted labels
     X = np.array(df) # dataframe in numpy (without labels)
 
-    ari = metrics.adjusted_rand_score(nplabelsTrue, labels)
+    ari = adjusted_rand_score(nplabelsTrue, labels)
     F1_score = f1_score(nplabelsTrue, labels, average='macro')
-    nmi = metrics.normalized_mutual_info_score(nplabelsTrue, labels)
+    nmi = normalized_mutual_info_score(nplabelsTrue, labels)
     score1 = sklearn.metrics.silhouette_score(X, nplabels, metric='euclidean')
     score2 = sklearn.metrics.davies_bouldin_score(X,nplabels)
     print("ARI: ",ari)
@@ -84,7 +83,7 @@ def main(df, labelsTrue):
     print("DBS: ",score2)
 
 if __name__ == "__main__":
-    df = pd.read_csv('lenses.csv')
+    df = pd.read_csv('./dataset/wine.csv')
     df.drop(df.columns[[0]], axis=1, inplace=True)
     df = df.values.tolist()
     labels = [x[-1] for x in df] # cluster labels
