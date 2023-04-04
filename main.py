@@ -9,9 +9,9 @@ if __name__ == "__main__":
     # files = ["lenses.csv"]
     # path = "./dataset/"
     for file in files:
-        path = path+file
+        path = "./Preprocessed/"+file
         df = pd.read_csv(path)
-        # df.drop(df.columns[[0]], axis=1, inplace=True)
+        df.drop(df.columns[[0]], axis=1, inplace=True)
         df = df.values.tolist()
         labels = [x[0] for x in df] # cluster labels
         df = [x[1:] for x in df] # removing cluster number

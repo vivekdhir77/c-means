@@ -13,7 +13,7 @@ def c_means(df, labelsTrue, k, type, m=2):
     # m = 2 # membership value
     dataSize = len(df) # no of data points
     c = random.sample(df, k) # random k centroids
-    epsilon = 1 # stopping criteria 1
+    epsilon = 100 # stopping criteria 1
     # print(c)
 
     dist = [[0 for i in range(dataSize)] for j in range(k)] # 2d Distance matrix

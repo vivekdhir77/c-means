@@ -19,6 +19,6 @@ def Quantmain(df, labels):
     df = df_new
     k = len(set(labels)) # no of clusters
     start = time.time()
-    c_means(df, labels, k, type=1)
+    c_means(df, labels, k, 1)
     end = time.time()
     print("The time of execution of above program is :",(end-start) * 10**3, "ms")
